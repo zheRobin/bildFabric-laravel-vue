@@ -5,5 +5,5 @@ const logo = usePage().props.mainLogoPath;
 </script>
 
 <template>
-    <img :src="logo" alt="Textfabrik">
+    <img :src="logo" alt="Bildfabrik">
 </template>

@@ -1,4 +1,4 @@
-# Textfabrik
+# Bildfabrik
 
 ## Installation
 
@@ -7,13 +7,13 @@ Alternative installation is possible without local dependencies relying on [Dock
 Clone the repository (replace username with your own):
 
 ```bash
-git clone https://username@bitbucket.org/rkablaoui/textfabrik.git
+git clone https://username@bitbucket.org/rkablaoui/bildfabrik.git
 ```
 
 Switch to the repo folder:
 
 ```bash
-cd textfabrik
+cd bildfabrik
 ```
 
 Install all the dependencies using composer:
@@ -47,13 +47,13 @@ To install with [Docker](https://www.docker.com), run following commands:
 Clone the repository (replace username with your own):
 
 ```bash
-git clone https://username@bitbucket.org/rkablaoui/textfabrik.git
+git clone https://username@bitbucket.org/rkablaoui/bildfabrik.git
 ```
 
 Switch to the repo folder:
 
 ```bash
-cd textfabrik
+cd bildfabrik
 ```
 
 Install all the dependencies using composer docker image (or use your own):

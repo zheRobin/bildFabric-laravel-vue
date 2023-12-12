@@ -1,8 +1,8 @@
 branch-defaults:
   master:
-    environment: Textfabrik-prod-env-php82-env
+    environment: Bildfabrik-prod-env-php82-env
 environment-defaults:
-  Textfabrik-prod-env-php82-env:
+  Bildfabrik-prod-env-php82-env:
     branch: null
     repository: null
 global:

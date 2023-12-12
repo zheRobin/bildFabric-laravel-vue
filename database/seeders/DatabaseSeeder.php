@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             PlanSeeder::class,
             WelcomeSeeder::class,
-            LanguageSeeder::class,
+            // LanguageSeeder::class,
         ]);
     }
 }
