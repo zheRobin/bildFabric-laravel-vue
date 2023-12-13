@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rules\File;
+use App\Rules\NonAnimatedGif;
 use Modules\Imports\Contracts\StoresImportingFile;
 use Modules\Imports\Services\ImporterFactory;
 
@@ -17,8 +18,9 @@ class StoreImportingFile implements StoresImportingFile
         Validator::make($input, [
             'upload' => [
                 'required',
-                File::types(['xls', 'xlsx', 'csv', 'json', 'xml'])
-                    ->max(5 * 1024),
+                new NonAnimatedGif,
+                File::types(['png', 'jpeg', 'jpg', 'webp', 'gif'])
+                    ->max(15 * 1024),
             ],
             'append' => ['required', 'boolean']
         ])->after(function (\Illuminate\Validation\Validator $validator) use ($user, $input) {

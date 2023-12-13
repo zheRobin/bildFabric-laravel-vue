@@ -10,9 +10,7 @@ class ImporterFactory
     public function getImporter(string $fileExtension): Importer
     {
         return match ($fileExtension) {
-            'json', 'xml' => new JsonImporter,
-            'xls', 'xlsx' => new ExcelImporter,
-            'csv' => new SimpleExcelImporter,
+            'png', 'jpeg', 'jpg', 'webp', 'gif' => new JsonImporter,
             default => throw new InvalidArgumentException("Wrong importer file extension [{$fileExtension}]"),
         };
     }

@@ -35,8 +35,8 @@ class PlanSeeder extends Seeder
             new PlanFeature([
                 'slug' => SubscriptionFeatureEnum::COLLECTION_ITEMS_LIMIT->slug(),
                 'name' => 'Collection Items',
-                'description' => 'up to 10 items per collection',
-                'value' => 10
+                'description' => 'up to 5 items per collection',
+                'value' => 5
             ]),
             new PlanFeature([
                 'slug' => SubscriptionFeatureEnum::API_REQUESTS->slug(),
@@ -77,8 +77,8 @@ class PlanSeeder extends Seeder
             new PlanFeature([
                 'slug' => SubscriptionFeatureEnum::COLLECTIONS_LIMIT->slug(),
                 'name' => 'Collections',
-                'description' => 'up to 3 collection',
-                'value' => 3
+                'description' => 'up to 20 collection',
+                'value' => 20
             ]),
             new PlanFeature([
                 'slug' => SubscriptionFeatureEnum::COLLECTION_ITEMS_LIMIT->slug(),
@@ -131,8 +131,8 @@ class PlanSeeder extends Seeder
             new PlanFeature([
                 'slug' => SubscriptionFeatureEnum::COLLECTION_ITEMS_LIMIT->slug(),
                 'name' => 'Collection Items',
-                'description' => 'up to 300 items per collection',
-                'value' => 300
+                'description' => 'up to 50 items per collection',
+                'value' => 50
             ]),
             new PlanFeature([
                 'slug' => SubscriptionFeatureEnum::API_REQUESTS->slug(),
@@ -179,8 +179,8 @@ class PlanSeeder extends Seeder
             new PlanFeature([
                 'slug' => SubscriptionFeatureEnum::COLLECTION_ITEMS_LIMIT->slug(),
                 'name' => 'Collection Items',
-                'description' => 'up to 1.000 items per collection',
-                'value' => 1000
+                'description' => 'up to 150 items per collection',
+                'value' => 150
             ]),
             new PlanFeature([
                 'slug' => SubscriptionFeatureEnum::API_REQUESTS->slug(),
@@ -233,8 +233,8 @@ class PlanSeeder extends Seeder
             new PlanFeature([
                 'slug' => SubscriptionFeatureEnum::COLLECTION_ITEMS_LIMIT->slug(),
                 'name' => 'Collection Items',
-                'description' => 'up to 10.000 items per collection',
-                'value' => 10000
+                'description' => 'up to 500 items per collection',
+                'value' => 500
             ]),
             new PlanFeature([
                 'slug' => SubscriptionFeatureEnum::API_REQUESTS->slug(),

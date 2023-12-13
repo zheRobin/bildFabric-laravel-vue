@@ -24,7 +24,7 @@ const form = useForm({
 const uploadingError = ref(null);
 
 const supportedExtensions = computed(() => {
-    return ['.xls', '.xlsx', '.csv', '.json', '.xml'].join(', ');
+    return ['.png', '.jpeg', '.jpg', '.webp', '.gif'].join(', ');
 });
 
 const canUploadRef = ref(!!(form.upload && !uploadingError.value));
@@ -135,7 +135,7 @@ const closeModal = () => {
 
             <span :class="`absolute top-0 left-0 right-0 bottom-0 w-full flex flex-col bg-white text-gray-800 pointer-events-none justify-center items-center`">
                 <span class="mx-2 text-center">
-                    <strong>{{ hasItems ? $t('Browse additional file to append or to replace. We support .xls, .xlsx, .csv, .json, .xml.') : $t('Browse file to upload. We support .xls, .xlsx, .csv, .json, .xml.') }}</strong>
+                    <strong>{{ hasItems ? $t('Browse additional file to append or to replace. We support .png, .jpeg, .jpg, .webp, .gif.') : $t('Browse file to upload. We support .png, .jpeg, .jpg, .webp, .gif.') }}</strong>
                     <small v-if="canUploadRef" :class="`text-gray-600 block`">
                         {{ uploadInfo }}
                     </small>
