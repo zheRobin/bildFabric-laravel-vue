@@ -30,19 +30,8 @@ class Collection extends Model
     protected $fillable = [
         'name',
         'team_id',
-        'headers',
         'last_uploaded_file_path',
     ];
-
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
-    protected $casts = [
-        'headers' => 'json',
-    ];
-
     /**
      * Purge all of the collection's resources.
      *

@@ -10,7 +10,7 @@ class ImporterFactory
     public function getImporter(string $fileExtension): Importer
     {
         return match ($fileExtension) {
-            'png', 'jpeg', 'jpg', 'webp', 'gif' => new JsonImporter,
+            'png', 'jpeg', 'jpg', 'webp', 'gif' => new ImageImporter,
             default => throw new InvalidArgumentException("Wrong importer file extension [{$fileExtension}]"),
         };
     }

@@ -22,16 +22,7 @@ class CollectionItem extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'data',
-    ];
-
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
-    protected $casts = [
-        'data' => 'json',
+        'uploaded_file_path','original_file_name'
     ];
 
     /**

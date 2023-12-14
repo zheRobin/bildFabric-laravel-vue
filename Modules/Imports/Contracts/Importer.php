@@ -8,6 +8,4 @@ use Modules\Collections\Models\Collection;
 interface Importer
 {
     public function import(User $user, Collection $collection): void;
-
-    public function getHeaders(Collection $collection): array;
 }

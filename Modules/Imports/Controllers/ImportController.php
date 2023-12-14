@@ -23,26 +23,17 @@ class ImportController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function store(Request $request, StoresImportingFile $uploader)
     {
         // validate and store uploaded file
-        $uploader = app(StoresImportingFile::class);
         $uploader->store($request->user(), $request->all());
 
         // get importer
         $importer = (new ImporterFactory)->getImporter(
             $request->user()->currentCollection->importFileExtension()
         );
-        // TODO: refactor, move into separate service
-        if (!boolval($request->offsetGet('append'))) {
-            $request->user()->currentCollection->purgeItems();
-        }
 
-        if ($request->user()->currentCollection->items->isNotEmpty()) {
-            $request->user()->currentCollection->update(['headers' => []]);
-        }
-
-        // import
+        // import image to S3 and store in database
         $importer->import($request->user(), $request->user()->currentCollection);
 
         return back(303);
