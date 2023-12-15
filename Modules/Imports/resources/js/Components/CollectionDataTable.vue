@@ -3,23 +3,24 @@ import Pagination from "Jetstream/Components/Pagination.vue";
 import DangerButton from "Jetstream/Components/DangerButton.vue";
 import {MinusCircleIcon} from "@heroicons/vue/20/solid";
 import axios from "axios";
+import {trans} from "laravel-vue-i18n";
+import {notify} from "notiwind";
 const props = defineProps({
     items: Object,
 });
 const deleteImage = (file) => {
-    axios.delete(route('collection-items.delete', file.id), {
-        errorBag: 'errors',
-        preserveScroll: true,
-        preserveState: false,
-        onSuccess: () => {
-            changePreset(null);
-            resetForm();
-            notify({
-                group: "success",
-                title: trans("Success"),
-                text: trans("Image deleted!")
-            }, 4000)
-        },
+    axios.delete(route('collection-items.delete', file.id)).then(() => {
+        notify({
+            group: "success",
+            title: trans("Success"),
+            text: trans("Image deleted!")
+        }, 4000)
+    }).catch(() => {
+        notify({
+            group: "error",
+            title: trans("Error"),
+            text: trans("Image could not be deleted!")
+        }, 4000)
     })
 }
 </script>
