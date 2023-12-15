@@ -73,7 +73,7 @@ const confirmUploading = () => {
         upload();
     }
 }
-
+const emit = defineEmits(['itemUploaded']);
 const upload = (append = false) => {
     form.append = append;
     confirmingAppending.value = false;
@@ -81,6 +81,7 @@ const upload = (append = false) => {
         errorBag: 'importFile',
         preserveScroll: true,
         onSuccess: () => {
+            emit('itemUploaded');
             clearFileInput();
         },
         onFinish: () => {

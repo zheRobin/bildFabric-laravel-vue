@@ -18,6 +18,9 @@ let itemsRef = ref(props.items);
 const handleItemDeleted = (id) => {
     itemsRef.value.data = itemsRef.value.data.filter(item => item.id !== id);
 };
+const handleItemUploaded = () => {
+    itemsRef.value = props.items;
+};
 </script>
 
 <template>
@@ -32,7 +35,7 @@ const handleItemDeleted = (id) => {
             <EmptyCollection v-if="!$page.props.auth.user.current_collection" />
 
             <template v-else>
-                <UploadFileForm v-if="permissions.canUpdateCollection" :hasItems="!!itemsRef.data.length" class="px-2 sm:px-0 mb-2" />
+                <UploadFileForm v-if="permissions.canUpdateCollection" :hasItems="!!itemsRef.data.length" class="px-2 sm:px-0 mb-2" @itemUploaded="handleItemUploaded"/>
 
                 <CollectionDataTable
                   v-if="itemsRef.data.length"
