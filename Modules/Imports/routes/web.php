@@ -20,6 +20,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
 
         Route::put('collection-items/{collectionItem}', [CollectionItemController::class, 'update'])->name('collection-items.update');
         Route::post('collection-items/{collectionItem}/image', [CollectionItemController::class, 'updateImage'])->name('collection-items.update-image');
+        Route::delete('collection-items/{collectionItem}', [CollectionItemController::class, 'destroy'])->name('collection-items.delete');
 
         Route::put('collections/{collection}/update-header', [CollectionHeaderController::class, 'update'])->name('collections.update-header');
     });

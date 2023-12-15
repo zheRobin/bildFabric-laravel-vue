@@ -10,16 +10,14 @@ use Modules\Imports\Models\CollectionItem;
 
 class CollectionItemController extends Controller
 {
-    public function update(Request $request, CollectionItem $collectionItem)
+    public function destroy(Request $request, CollectionItem $collectionItem)
     {
-        $updater = app(UpdatesCollectionItem::class);
-
-        $updater->update($request->user(), $collectionItem, $request->all());
+        error_log('delete');
 
         return back(303);
     }
 
-    public function updateImage(Request $request, CollectionItem $collectionItem)
+    public function update(Request $request, CollectionItem $collectionItem)
     {
         $updater = app(UpdatesImageInCell::class);
 
