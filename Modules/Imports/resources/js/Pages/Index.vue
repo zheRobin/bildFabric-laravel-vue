@@ -4,12 +4,20 @@ import CollectionDataTable from "Modules/Imports/resources/js/Components/Collect
 import UploadFileForm from "Modules/Imports/resources/js/Pages/Partials/UploadFileForm.vue";
 import DashboardPanel from "Jetstream/Components/DashboardPanel.vue";
 import EmptyCollection from "Modules/Collections/resources/js/Components/EmptyCollection.vue";
+import { ref } from 'vue';
 
 const props = defineProps({
     items: Object,
     permissions: Object,
 });
 
+// Make sure to use ref for reactivity
+let itemsRef = ref(props.items);
+
+// Deletes item from itemsRef list
+const handleItemDeleted = (id) => {
+    itemsRef.value.data = itemsRef.value.data.filter(item => item.id !== id);
+};
 </script>
 
 <template>
@@ -24,12 +32,14 @@ const props = defineProps({
             <EmptyCollection v-if="!$page.props.auth.user.current_collection" />
 
             <template v-else>
-                <UploadFileForm v-if="permissions.canUpdateCollection" :hasItems="!!items.data.length" class="px-2 sm:px-0 mb-2" />
+                <UploadFileForm v-if="permissions.canUpdateCollection" :hasItems="!!itemsRef.data.length" class="px-2 sm:px-0 mb-2" />
 
-                <CollectionDataTable v-if="items.data.length"
-                                     :canUpdateCollection="permissions.canUpdateCollection"
-                                     :items="items"
-                                     :headers="$page.props.auth.user.current_collection.headers" class="" />
+                <CollectionDataTable
+                  v-if="itemsRef.data.length"
+                  :canUpdateCollection="permissions.canUpdateCollection"
+                  :items="itemsRef"
+                  @deleteItem="handleItemDeleted"
+                  :headers="$page.props.auth.user.current_collection.headers" class="" />
             </template>
         </DashboardPanel>
     </AppLayout>

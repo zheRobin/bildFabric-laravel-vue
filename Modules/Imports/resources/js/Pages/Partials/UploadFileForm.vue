@@ -77,35 +77,18 @@ const confirmUploading = () => {
 const upload = (append = false) => {
     form.append = append;
     confirmingAppending.value = false;
-
-    if (Array.isArray(form.upload)) {
-        form.post(route('import.images'), {
-            errorBag: 'importFile',
-            preserveScroll: true,
-            preserveState: false,
-            onSuccess: () => {
+    form.post(route('import.file'), {
+        errorBag: 'importFile',
+        preserveScroll: true,
+        onSuccess: () => {
+            clearFileInput();
+        },
+        onFinish: () => {
+            if (usePage().props?.errors?.importFile?.upload) {
                 clearFileInput();
-            },
-            onFinish: () => {
-                if (usePage().props?.errors?.importFile?.upload) {
-                    clearFileInput();
-                }
             }
-        });
-    } else {
-        form.post(route('import.file'), {
-            errorBag: 'importFile',
-            preserveScroll: true,
-            onSuccess: () => {
-                clearFileInput();
-            },
-            onFinish: () => {
-                if (usePage().props?.errors?.importFile?.upload) {
-                    clearFileInput();
-                }
-            }
-        });
-    }
+        }
+    });
 }
 
 const clearFileInput = () => {

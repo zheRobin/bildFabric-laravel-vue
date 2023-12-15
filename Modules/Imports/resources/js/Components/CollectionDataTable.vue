@@ -8,8 +8,11 @@ import {notify} from "notiwind";
 const props = defineProps({
     items: Object,
 });
+const emit = defineEmits(['deleteItem']);
+
 const deleteImage = (file) => {
     axios.delete(route('collection-items.delete', file.id)).then(() => {
+        emit('deleteItem', file.id);
         notify({
             group: "success",
             title: trans("Success"),
