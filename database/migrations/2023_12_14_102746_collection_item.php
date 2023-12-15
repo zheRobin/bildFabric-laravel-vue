@@ -12,12 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('collection_items', function (Blueprint $table) {
-            $table->string('uploaded_file_path')->nullable();
-            $table->string('original_file_name')->nullable();
+            $table->string('source')->nullable();
+            $table->string('title')->nullable();
             $table->dropColumn('data');
         });
         Schema::table('collections', function (Blueprint $table) {
             $table->dropColumn('headers');
+            $table->dropColumn('last_uploaded_file_path');
         });
     }
 
@@ -27,12 +28,13 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('collection_items', function (Blueprint $table) {
-            $table->dropColumn('uploaded_file_path');
-            $table->dropColumn('original_file_name');
-            $table->longText('headers')->nullable();
+            $table->dropColumn('source');
+            $table->dropColumn('title');
+            $table->longText('data')->nullable();
         });
         Schema::table('collections', function (Blueprint $table) {
-            $table->longText('headers')->nullable();;
+            $table->longText('headers')->nullable();
+            $table->longText('last_uploaded_file_path')->nullable();
         });
     }
 };

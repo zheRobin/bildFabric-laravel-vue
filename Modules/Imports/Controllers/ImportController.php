@@ -25,17 +25,7 @@ class ImportController extends Controller
 
     public function store(Request $request, StoresImportingFile $uploader)
     {
-        // validate and store uploaded file
         $uploader->store($request->user(), $request->all());
-
-        // get importer
-        $importer = (new ImporterFactory)->getImporter(
-            $request->user()->currentCollection->importFileExtension()
-        );
-
-        // import image to S3 and store in database
-        $importer->import($request->user(), $request->user()->currentCollection);
-
         return back(303);
     }
 

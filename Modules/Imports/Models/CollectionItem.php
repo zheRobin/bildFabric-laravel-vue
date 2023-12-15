@@ -22,7 +22,7 @@ class CollectionItem extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'uploaded_file_path','original_file_name'
+        'source','title', 'size'
     ];
 
     /**

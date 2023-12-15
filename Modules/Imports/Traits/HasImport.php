@@ -16,13 +16,27 @@ trait HasImport
      */
     public function uploadImportFile(UploadedFile $uploadedFile): void
     {
-        $this->forceFill([
-            'last_uploaded_file_path' => $uploadedFile->storeAs(
-                $this->importFileDirectory(),
-                $this->hashName($uploadedFile->getClientOriginalExtension()),
-                ['disk' => $this->importFileDisk()]
-            )
-        ])->save();
+        $originalName = $uploadedFile->getClientOriginalName();
+        $hashName = $this->hashName($uploadedFile->getClientOriginalExtension());
+        $filePath = 'images/' . $hashName;
+        $bytes = $uploadedFile->getSize();
+        $kilobytes = round($bytes / 1024);
+        $megabytes = round($bytes / (1024 * 1024),2);
+        if ($bytes < 1024) {
+            $size = $bytes . " Bytes";
+        } elseif ($bytes < 1048576) {
+            $size = $kilobytes . " KB";
+        } else {
+            $size = $megabytes . " MB";
+        }
+        Storage::disk('s3')->put($filePath, file_get_contents($uploadedFile));
+        Storage::disk('s3')->setVisibility($filePath, 'public');
+        $url = Storage::disk('s3')->url($filePath);
+        $this->items()->create([
+            'source' => $url,
+            'title' => $originalName,
+            'size' => $size
+        ]);
     }
 
     /**
