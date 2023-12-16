@@ -9,7 +9,6 @@ const props = defineProps({
     updatePreset: Function,
     canChangeLanguage: Boolean,
     needPresetUpdate: Boolean,
-    title: Object
 });
 
 const currentInputLanguage = ref(props.preset.input_language_id ?? null);
@@ -51,7 +50,6 @@ const changeOutputLanguage = (language) => {
                                    :languages="languages"
                                    :languageId="currentInputLanguage"
                                    :canChangeLanguage="canChangeLanguage"
-                                   :title="title"
                                    class="mt-10" />
         </div>
 

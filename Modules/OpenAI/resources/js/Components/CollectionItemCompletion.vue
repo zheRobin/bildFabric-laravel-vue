@@ -162,7 +162,7 @@ const translateContent = () => {
             <Spinner class="" />
         </div>
 
-        <div v-else class="overflow-hidden min-h-56 pt-3 px-10 text-base leading-7 text-gray-900 pb-6 whitespace-pre-wrap">
+        <div v-else class="aspect-h-7 aspect-w-10 block w-full overflow-hidden rounded-lg bg-gray-100 focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 focus-within:ring-offset-gray-100 relative">
             {{ generatedContent }}
         </div>
     </div>
