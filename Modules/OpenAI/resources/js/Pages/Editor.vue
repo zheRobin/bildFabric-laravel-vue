@@ -23,14 +23,11 @@ import {trans} from "laravel-vue-i18n";
 const props = defineProps({
     selectedPreset: Object,
     presets: Array,
-    attributes: Array,
     models: Array,
     languages: Array,
     hasItems: Boolean,
     permissions: Object,
-    title: Object
 });
-
 const selectedPreset = ref(null);
 const selectedPresetId = ref(selectedPreset.id);
 
@@ -46,7 +43,7 @@ const initSelectedPreset = () => {
 
 const form = useForm({
     collection_id: null,
-    model: 'gpt-3.5-turbo',
+    model: 'gpt-4-vision-preview',
     system_prompt: '',
     user_prompt: '',
     name: null,
@@ -107,10 +104,6 @@ const changePreset = (value, showNotifications = true) => {
     }
 
     presetNeedsUpdate.value = false;
-
-    if (showNotifications) {
-        validatePrompts();
-    }
 }
 
 const getPreset = (presetId) => {
@@ -237,45 +230,6 @@ const changeOutputLanguage = (language) => {
     form.output_language_id = language ? language.id : null;
 }
 
-const validatePrompts = () => {
-    if (promptHasWrongAttribute(form.system_prompt) ||
-        promptHasWrongAttribute(form.user_prompt)) {
-        notify({
-            group: "warning",
-            title: "Warning",
-            text: trans('Prompt has wrong attributes!')
-        }, 2000)
-    }
-}
-
-const promptHasWrongAttribute = (prompt) => {
-    if (!prompt) {
-        return false;
-    }
-
-    let hasError = false;
-    const indexes = [...prompt.matchAll(new RegExp('@', 'gi'))].map(el => el.index);
-
-    indexes.forEach((index) => {
-        let wrongAttribute = true;
-
-        props.attributes.forEach((attr) => {
-            const foundedAttribute = prompt.slice(index + 1, index + attr.name.length + 1);
-
-            if (foundedAttribute == attr.name) {
-                wrongAttribute = false;
-                return;
-            }
-        });
-
-        if (wrongAttribute) {
-            hasError = true;
-            return;
-        }
-    });
-
-    return hasError;
-}
 </script>
 
 <template>
@@ -415,13 +369,10 @@ const promptHasWrongAttribute = (prompt) => {
                     </section>
 
                     <!-- Prompt fields -->
-                    <div class="lg:grid lg:grid-cols-2 lg:gap-x-8 pt-8">
-                        <div class="mt-6 lg:mt-0 bg-gray-50 rounded p-4">
-                            <PromptEditor :canEdit="permissions.canManagePresets" :title="$t('System')" v-model="form.system_prompt" :attributes="attributes" />
-                        </div>
+                    <div class="lg:grid pt-8">
 
                         <div class="mt-6 lg:mt-0 bg-gray-50 rounded p-4">
-                            <PromptEditor :canEdit="permissions.canManagePresets" :title="$t('User')" v-model="form.user_prompt" :attributes="attributes" />
+                            <PromptEditor :canEdit="permissions.canManagePresets" :title="$t('User')" v-model="form.user_prompt" />
                         </div>
                     </div>
 
@@ -431,8 +382,7 @@ const promptHasWrongAttribute = (prompt) => {
                                            :languages="languages"
                                            :canChangeLanguage="permissions.canManagePresets"
                                            :needPresetUpdate="presetNeedsUpdate"
-                                           :updatePreset="updatePreset"
-                                           :title="props.title"/>
+                                           :updatePreset="updatePreset"/>
                 </template>
             </template>
         </DashboardPanel>

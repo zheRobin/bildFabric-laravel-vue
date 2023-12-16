@@ -32,19 +32,18 @@ watch(() => props.languageId, (langId) => {
 
 const currentItem = ref([]);
 
-const itemData = computed(() => {
+const source = computed(() => {
     return currentItem.value
-        ? currentItem.value.data
-        : [];
+        ? currentItem.value.source
+        : null;
 });
 
 const currentPage = ref(1);
 const lastPage = ref(null);
 const findElementHeader = () => {
     let title = '';
-
-    if (currentItem.value.data !== undefined) {
-        title = currentItem.value.data.find((item) => item.header === props.title.name);
+    if (currentItem.value.title !== undefined) {
+        title = currentItem.value.title;
 
         if (title) {
             let maxLength = 70;
@@ -53,11 +52,10 @@ const findElementHeader = () => {
             } else if (window.innerWidth < 1024) {
                 maxLength = 45;
             }
-
-            if (title.value.length > maxLength) {
-                return title.value.slice(0, maxLength - 5) + '...';
+            if (title.length > maxLength) {
+                return title.slice(0, maxLength - 5) + '...';
             }
-            return title.value;
+            return title;
         }
     }
 }
@@ -148,15 +146,8 @@ const translateItem = () => {
 <!--            <Spinner class="" />-->
 <!--        </div>-->
 
-        <div  class="min-h-56">
-            <div v-for="(item, index) in itemData" :key="`item-${index}`" class="border-t border-gray-200">
-                <dl class="divide-y divide-gray-100 cursor-default">
-                    <div class="px-4 py-3 sm:grid sm:grid-cols-2 sm:gap-4 sm:px-6">
-                        <dt class="text-sm font-medium text-gray-900 truncate" :title="item.header">{{ item.header }}</dt>
-                        <dd class="mt-1 text-right text-sm leading-6 text-gray-700 sm:mt-0">{{ item.value ?? '-' }}</dd>
-                    </div>
-                </dl>
-            </div>
+        <div class="aspect-h-7 aspect-w-10 block w-full overflow-hidden rounded-lg bg-gray-100 focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 focus-within:ring-offset-gray-100 relative">
+            <img :src="source" class="pointer-events-none object-cover group-hover:opacity-75"/>
         </div>
     </div>
 </template>
