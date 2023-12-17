@@ -16,11 +16,11 @@ return [
     'organization' => env('OPENAI_ORGANIZATION'),
 
     'default-params' => [
-        'model' => 'gpt-3.5-turbo',
+        'model' => 'gpt-4-vision-preview',
         'temperature' => 1,
         'top_p' => 1,
         'presence_penalty' => 0,
         'frequency_penalty' => 0,
-        'max_tokens' => 600,
+        'max_tokens' => 300,
     ]
 ];

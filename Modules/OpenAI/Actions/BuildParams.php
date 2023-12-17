@@ -9,7 +9,6 @@ use Modules\OpenAI\Contracts\BuildsPrompt;
 use Modules\OpenAI\Services\PromptService;
 use Modules\Presets\Models\Preset;
 use Modules\Subscriptions\Enums\SubscriptionFeatureEnum;
-use Modules\Translations\Contracts\TranslatesData;
 
 class BuildParams implements BuildsParams
 {
@@ -17,23 +16,10 @@ class BuildParams implements BuildsParams
     {
         $promptService = app(PromptService::class);
         $promptData = $promptService->getData($collectionItem);
-
-        // translate input
-        if ($preset->translateInput()) {
-            $arrayTranslator = app(TranslatesData::class);
-
-            $promptData = $arrayTranslator->translate($promptData, $preset->inputLanguage);
-        }
-
-        // build prompt
-        $builder = app(BuildsPrompt::class);
-        $systemMessage = $builder->build($promptData, $preset->getSystemMessage());
-        $userMessage = $builder->build($promptData, $preset->getUserMessage());
-
         $hasOwnParams = $user->currentTeam->planSubscription->canUseFeature(SubscriptionFeatureEnum::OPENAI_PARAMS);
 
         return $hasOwnParams
-            ? $preset->getChatParams($systemMessage, $userMessage)
-            : $preset->getDefaultChatParams($systemMessage, $userMessage);
+            ? $preset->getChatParams($promptData, $preset->getUserMessage())
+            : $preset->getDefaultChatParams($promptData, $preset->getUserMessage());
     }
 }

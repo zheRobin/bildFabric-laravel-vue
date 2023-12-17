@@ -7,7 +7,7 @@ return [
                 'name' => 'Headline',
                 'system_prompt' => 'Write a one-line title about the following product. Do not use any quotation marks.',
                 'user_prompt' => '@Product group',
-                'model' => 'gpt-3.5-turbo',
+                'model' => 'gpt-4-vision-preview',
                 'temperature' => 1,
                 'top_p' => 1,
                 'presence_penalty' => 0,
@@ -17,7 +17,7 @@ return [
                 'name' => 'Subheading',
                 'system_prompt' => 'Write a 2 sentence subheading for the product.',
                 'user_prompt' => '@Product group @Product',
-                'model' => 'gpt-3.5-turbo',
+                'model' => 'gpt-4-vision-preview',
                 'temperature' => 1,
                 'top_p' => 1,
                 'presence_penalty' => 0,
@@ -33,7 +33,7 @@ return [
 @Feature 3
 @Feature 4
 @Feature 5',
-                'model' => 'gpt-3.5-turbo',
+                'model' => 'gpt-4-vision-preview',
                 'temperature' => 1,
                 'top_p' => 1,
                 'presence_penalty' => 0,
@@ -49,7 +49,7 @@ return [
 @Feature 3
 @Feature 4
 @Feature 5',
-                'model' => 'gpt-3.5-turbo',
+                'model' => 'gpt-4-vision-preview',
                 'temperature' => 1,
                 'top_p' => 1,
                 'presence_penalty' => 2,
@@ -61,7 +61,7 @@ return [
                 'name' => 'Headline',
                 'system_prompt' => 'Schreibe einen einzeiligen Titel zu folgendem Produkt. Verwende keine Anführungszeichen.',
                 'user_prompt' => '@Produktgruppe',
-                'model' => 'gpt-3.5-turbo',
+                'model' => 'gpt-4-vision-preview',
                 'temperature' => 1,
                 'top_p' => 1,
                 'presence_penalty' => 0,
@@ -71,7 +71,7 @@ return [
                 'name' => 'Subheading',
                 'system_prompt' => 'Schreibe ein Subheading mit 2 Sätzen für das Produkt.',
                 'user_prompt' => '@Produktgruppe @Produkt',
-                'model' => 'gpt-3.5-turbo',
+                'model' => 'gpt-4-vision-preview',
                 'temperature' => 1,
                 'top_p' => 1,
                 'presence_penalty' => 0,
@@ -87,7 +87,7 @@ return [
 @Merkmal 3
 @Merkmal 4
 @Merkmal 5',
-                'model' => 'gpt-3.5-turbo',
+                'model' => 'gpt-4-vision-preview',
                 'temperature' => 1,
                 'top_p' => 1,
                 'presence_penalty' => 0,
@@ -103,7 +103,7 @@ return [
 @Merkmal 3
 @Merkmal 4
 @Merkmal 5',
-                'model' => 'gpt-3.5-turbo',
+                'model' => 'gpt-4-vision-preview',
                 'temperature' => 1,
                 'top_p' => 1,
                 'presence_penalty' => 2,

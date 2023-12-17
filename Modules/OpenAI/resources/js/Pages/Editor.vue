@@ -128,7 +128,7 @@ const addPreset = () => {
 }
 
 const resetForm = () => {
-    form.defaults({model: 'gpt-3.5-turbo', system_prompt: '', user_prompt: '', name: null, temperature: 1, top_p: 1, presence_penalty: 0, frequency_penalty: 0, input_language_id: null, output_language_id: null});
+    form.defaults({model: 'gpt-4-vision-preview', system_prompt: '', user_prompt: '', name: null, temperature: 1, top_p: 1, presence_penalty: 0, frequency_penalty: 0, input_language_id: null, output_language_id: null});
     form.reset();
 }
 

@@ -5,6 +5,7 @@ namespace Modules\OpenAI\Services;
 use Modules\Collections\Models\Collection;
 use Modules\Imports\Enums\HeaderTypeEnum;
 use Modules\Imports\Models\CollectionItem;
+use finfo;
 
 class PromptService
 {
@@ -14,13 +15,12 @@ class PromptService
      * @param Collection $collection
      * @return array
      */
-    public function getHeaders(Collection $collection): array
+    private function getCode($imagePath)
     {
-        $headers = array_filter($collection->headers, function ($header) {
-            return $header['type'] !== '';
-        });
-
-        return array_column($headers, 'name');
+        $image = file_get_contents($imagePath);
+        $finfo = new finfo(FILEINFO_MIME_TYPE);
+        $type = $finfo->buffer($image);
+        return 'data:' . $type . ';base64,' . base64_encode($image);
     }
 
     /**
@@ -29,20 +29,9 @@ class PromptService
      * @param CollectionItem $collectionItem
      * @return array
      */
-    public function getData(CollectionItem $collectionItem): array
+    public function getData(CollectionItem $collectionItem)
     {
-        $headers = $this->getHeaders($collectionItem->collection);
-
-        $promptData = [];
-
-        foreach ($collectionItem->data as $cell) {
-            if (isset($cell['value']) &&
-                isset($cell['header']) &&
-                in_array($cell['header'], $headers)) {
-                $promptData[$cell['header']] = $cell['value'];
-            }
-        }
-
-        return $promptData;
+        $base64Data = $this->getCode($collectionItem->source);
+        return $base64Data;
     }
 }

@@ -16,7 +16,6 @@ class CollectionItemCompletionController extends Controller
     {
         $builder = app(BuildsParams::class);
         $completer = app(CompletesItemStreamed::class);
-
         $params = $builder->build($request->user(), $preset, $item);
 
         return response()->stream(function () use ($completer, $params, $request) {

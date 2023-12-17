@@ -6,18 +6,25 @@ use Modules\OpenAI\Enums\ChatRoleEnum;
 
 trait HasOpenAIParams
 {
-    public function getChatParams(string $systemMessage, string $userMessage)
+    public function getChatParams(string $promptData, string $userMessage)
     {
         return array_filter([
             'model' => $this->model,
             'messages' => [
                 [
-                    'role' => ChatRoleEnum::SYSTEM->roleName(),
-                    'content' => $systemMessage,
-                ],
-                [
                     'role' => ChatRoleEnum::USER->roleName(),
-                    'content' => $userMessage,
+                    'content' => [
+                        [
+                            'type' => 'text',
+                            'text' => $userMessage,
+                        ],
+                        [
+                            'type' => 'image_url',
+                            'image_url' => [
+                                'url' => $promptData
+                            ],
+                        ]
+                    ],
                 ]
             ],
             'temperature' => $this->temperature,
@@ -28,17 +35,24 @@ trait HasOpenAIParams
         ]);
     }
 
-    public function getDefaultChatParams(string $systemMessage, string $userMessage)
+    public function getDefaultChatParams(string $promptData, string $userMessage)
     {
         return [
             'messages' => [
                 [
-                    'role' => ChatRoleEnum::SYSTEM->roleName(),
-                    'content' => $systemMessage,
-                ],
-                [
                     'role' => ChatRoleEnum::USER->roleName(),
-                    'content' => $userMessage,
+                    'content' => [
+                        [
+                            'type' => 'text',
+                            'text' => $userMessage,
+                        ],
+                        [
+                            'type' => 'image_url',
+                            'image_url' => [
+                                'url' => $promptData
+                            ],
+                        ]
+                    ],
                 ]
             ],
             ...config('openai.default-params')
