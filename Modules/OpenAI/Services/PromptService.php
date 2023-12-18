@@ -31,7 +31,7 @@ class PromptService
      */
     public function getData(CollectionItem $collectionItem)
     {
-        $base64Data = $this->getCode($collectionItem->source);
+        $base64Data = $this->getCode($collectionItem['source']);
         return $base64Data;
     }
 }

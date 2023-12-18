@@ -15,7 +15,8 @@ class BuildParams implements BuildsParams
     public function build(User $user, Preset $preset, CollectionItem $collectionItem): array
     {
         $promptService = app(PromptService::class);
-        $promptData = $promptService->getData($collectionItem);
+        $promptData = $collectionItem['source'];
+        // $promptData = $promptService->getData($collectionItem);
         $hasOwnParams = $user->currentTeam->planSubscription->canUseFeature(SubscriptionFeatureEnum::OPENAI_PARAMS);
 
         return $hasOwnParams
